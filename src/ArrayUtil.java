@@ -72,5 +72,11 @@ public class ArrayUtil {
             System.out.println(numbers.length - 5);
         }
 
+        System.out.println();
+
+
+        int middleIndex = length / 2;
+        System.out.println(numbers[middleIndex]);
+
     }
 }
