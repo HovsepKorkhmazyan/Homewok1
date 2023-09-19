@@ -22,7 +22,7 @@ public class ArrayUtil {
 
         int smallestNumber = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] < smallestNumber){
+            if (numbers[i] < smallestNumber) {
                 smallestNumber = numbers[i];
             }
 
@@ -31,11 +31,12 @@ public class ArrayUtil {
 
         System.out.println();
 
-        int evenNumbers = 0; int oddNumbers=0;
+        int evenNumbers = 0;
+        int oddNumbers = 0;
 
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] % 2 == 0){
-                evenNumbers +=1;
+            if (numbers[i] % 2 == 0) {
+                evenNumbers += 1;
 
             } else {
                 oddNumbers += 1;
@@ -61,7 +62,7 @@ public class ArrayUtil {
 
         System.out.println();
 
-        if (numbers.length > 2){
+        if (numbers.length > 2) {
             System.out.println(numbers.length - 5);
         } else if (numbers.length <= 2) {
             System.out.println("Can not print the middle value");

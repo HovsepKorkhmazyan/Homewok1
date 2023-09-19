@@ -1,4 +1,5 @@
 package DynamicArray;
+
 public class DynamicArray {
     private int[] array = new int[10];
     private int size = 0;
@@ -17,12 +18,13 @@ public class DynamicArray {
     }
 
     public int getByIndex(int index) {
-        if (index >= 0 && index < size) {
-            return array[index];
+        if (index < array.length) {
+            return index;
         } else {
             return -1;
         }
     }
+
     public void print() {
         for (int i = 0; i < size; i++) {
             System.out.print(array[i] + " ");

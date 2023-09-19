@@ -20,13 +20,12 @@ public class ForExamples {
         System.out.println();
         System.out.println();
 
-        int[] array = {2,5,8,4,9,3,7};
+        int[] array = {2, 5, 8, 4, 9, 3, 7};
         int largestNum = array[0];
-        for (int i = 0; i < array.length ; i++) {
-            if (array[i] > largestNum ) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > largestNum) {
                 largestNum = array[i];
             }
-
 
 
         }
