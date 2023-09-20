@@ -14,6 +14,9 @@ public class DynamicArray {
 
     private void extend() {
         int[] secondArray = new int[array.length + 10];
+        for (int i = 0; i < array.length; i++) {
+            secondArray[i] = array[i];
+        }
         array = secondArray;
     }
 
