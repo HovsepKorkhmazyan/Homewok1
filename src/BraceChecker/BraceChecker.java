@@ -33,6 +33,10 @@ public class BraceChecker {
         if (!stack.isEmpty()) {
             char openingBrace = stack.pop();
             System.out.println("Error: opened " + openingBrace + " but not closed");
+            System.out.println("String is not balanced");
+        }
+        if (stack.isEmpty()){
+            System.out.println("String is balanced");
         }
     }
 }
