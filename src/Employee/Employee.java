@@ -8,7 +8,7 @@ public class Employee {
     private String company;
     private String position;
 
-    private Employee(String name, String employeeID, int salary, String company, String position) {
+    public Employee(String name, String employeeID, int salary, String company, String position) {
         this.name = name;
         this.employeeID = employeeID;
         this.salary = salary;
@@ -16,7 +16,7 @@ public class Employee {
         this.position = position;
     }
 
-    private Employee() {
+    public Employee() {
 
     }
 
