@@ -1,8 +1,8 @@
 package Employee;
 
 public class EmployeeStorage {
-    String[] employee = new String[10];
-    int size = 0;
+    public String[] employee = new String[10];
+    private int size = 0;
 
     private void extend() {
         String[] temparray = new String[employee.length + 10];
@@ -17,14 +17,14 @@ public class EmployeeStorage {
         employee[size++] = employeeName;
     }
 
-    private void print() {
+    public void print() {
         for (String x : employee) {
             System.out.println(x);
 
         }
     }
 
-    private String searchByEmployeeID(String employeeID) {
+    public String searchByEmployeeID(String employeeID) {
         for (int i = 0; i < employee.length; i++) {
             if (employee[i].equals(employeeID)) {
                 return employee[i];
@@ -35,7 +35,7 @@ public class EmployeeStorage {
         return "Employee ID was not found";
     }
 
-    private String searchByCompanyName(String companyName) {
+    public String searchByCompanyName(String companyName) {
         for (int i = 0; i < employee.length; i++) {
             if (employee[i].equals(companyName)) {
                 return employee[i];
