@@ -24,7 +24,7 @@ public class EmployeeDemo {
                     Employee employee = new Employee();
                     String employeeName = scanner.nextLine();
                     employee.setName(employeeName);
-                    es.addEmployee(employee);
+                    es.addEmployee(String.valueOf(employee));
                     break;
                 case 2:
                     es.print();

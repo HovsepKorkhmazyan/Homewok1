@@ -16,7 +16,7 @@ public class Employee {
         this.position = position;
     }
 
-    public Employee(){
+    public Employee() {
 
     }
 
