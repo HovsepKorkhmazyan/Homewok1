@@ -10,11 +10,11 @@ public class EmployeeDemo {
         boolean isRunning = true;
         EmployeeStorage es = new EmployeeStorage();
         while (isRunning) {
-            System.out.println("Type 0 for Exit");
-            System.out.println("Type 1 for adding an Employee");
-            System.out.println("Type 2 for printing out the names of every Employee of the company");
-            System.out.println("Type 3 for searching an Employee by EmployeeID");
-            System.out.println("Type 4 for searching an Employee by company name");
+            System.out.println("Input 0 to EXIT");
+            System.out.println("Input 1 to ADD an Employee");
+            System.out.println("Input 2 to PRINT OUT the names of every Employee of the company");
+            System.out.println("Input 3 to SEARCH BY EMPLOYEEID");
+            System.out.println("Input 4 to SEARCH an Employee by company name");
             int sc = Integer.parseInt(scanner.nextLine());
             switch (sc) {
                 case 0:
