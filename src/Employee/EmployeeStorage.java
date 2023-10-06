@@ -10,11 +10,11 @@ public class EmployeeStorage {
         employeeStorage = temporary;
     }
 
-    public void addEmployee(String employeeName) {
+    public void addEmployee(Employee employee) {
         if (size >= employeeStorage.length) {
             extend();
         }
-        employeeStorage[size++] = new Employee(employeeName);
+        employeeStorage[size++] = employee;
     }
 
     public void print() {

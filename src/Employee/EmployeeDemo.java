@@ -10,21 +10,18 @@ public class EmployeeDemo {
         boolean isRunning = true;
         EmployeeStorage es = new EmployeeStorage();
         while (isRunning) {
-            System.out.println("Input 0 to EXIT");
-            System.out.println("Input 1 to ADD an Employee");
-            System.out.println("Input 2 to PRINT OUT the names of every Employee of the company");
-            System.out.println("Input 3 to SEARCH BY EMPLOYEEID");
-            System.out.println("Input 4 to SEARCH an Employee by company name");
+            displayOptions();
             int sc = Integer.parseInt(scanner.nextLine());
             switch (sc) {
                 case 0:
                     isRunning = false;
                     break;
                 case 1:
-                    Employee employee = new Employee();
-                    String employeeName = scanner.nextLine();
-                    employee.setName(employeeName);
-                    es.addEmployee(String.valueOf(employee));
+                    System.out.println("Please Enter the Name");
+                    String name = scanner.nextLine();
+                    Employee employee = new Employee(name);
+                    es.addEmployee(employee);
+
                     break;
                 case 2:
                     es.print();
@@ -42,4 +39,13 @@ public class EmployeeDemo {
             }
         }
     }
+
+    private static void displayOptions() {
+        System.out.println("Input 0 to EXIT");
+        System.out.println("Input 1 to ADD an Employee");
+        System.out.println("Input 2 to PRINT OUT the names of every Employee of the company");
+        System.out.println("Input 3 to SEARCH BY EMPLOYEEID");
+        System.out.println("Input 4 to SEARCH an Employee by company name");
+    }
 }
+
