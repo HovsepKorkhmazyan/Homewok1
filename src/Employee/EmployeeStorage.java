@@ -46,6 +46,26 @@ public class EmployeeStorage {
         }
         return "Employee  was not found";
     }
+
+    public void deleteById(String employeeId) {
+        for (int i = 0; i < size; i++) {
+            if (employeeStorage[i].getEmployeeID().equals(employeeId)) {
+                employeeStorage[i] = null;
+                size--;
+                System.out.println("Employee with ID " + employeeId + " has been deleted.");
+            } else {
+                System.out.println("Employee with ID " + employeeId + " was not found.");
+            }
+        }
+    }
+    public void changeEmployeeById(String employeeId){
+        for (int i = 0; i < size; i++) {
+            if(employeeStorage[i].getEmployeeID().equals(employeeId)){
+                employeeStorage[i].setEmployeeID(employeeId);
+            }
+
+        }
+    }
 }
 
 

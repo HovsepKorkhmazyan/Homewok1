@@ -36,6 +36,14 @@ public class EmployeeDemo {
                     String resultByCoName = es.searchByCompanyName(searchCoName);
                     System.out.println(resultByCoName);
                     break;
+                case 5:
+                    String employeeId = scanner.nextLine();
+                    es.deleteById(employeeId);
+                    break;
+                case 6:
+                    String employeeIdChange = scanner.nextLine();
+                    es.changeEmployeeById(employeeIdChange);
+                    break;
             }
         }
     }
@@ -46,6 +54,8 @@ public class EmployeeDemo {
         System.out.println("Input 2 to PRINT OUT the names of every Employee of the company");
         System.out.println("Input 3 to SEARCH BY EMPLOYEEID");
         System.out.println("Input 4 to SEARCH an Employee by company name");
+        System.out.println("Input 5 to Delete an employee by ID");
+        System.out.println("Input 6 to change an employee ID");
     }
 }
 
