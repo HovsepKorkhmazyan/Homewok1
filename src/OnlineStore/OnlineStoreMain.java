@@ -2,6 +2,7 @@ package OnlineStore;
 
 import OnlineStore.exception.OutOfStockException;
 import OnlineStore.model.User;
+import OnlineStore.storage.ProductStorage;
 import OnlineStore.storage.UserStorage;
 
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import static OnlineStore.storage.UserStorage.users;
 public class OnlineStoreMain {
     private static Scanner scanner = new Scanner(System.in);
     static UserStorage user = new UserStorage();
+    static ProductStorage products = new ProductStorage();
 
     private static User loggedInUser;
 

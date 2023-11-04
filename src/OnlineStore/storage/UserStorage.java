@@ -4,16 +4,16 @@ import OnlineStore.model.User;
 
 public class UserStorage {
     public static User[] users = new User[10];
-    private static int size = 0;
+    private static int count = 0;
 
     public void add(User user) {
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
-        if (size == users.length) {
+        if (count == users.length) {
             extend();
         }
-        users[size++] = user;
+        users[count++] = user;
     }
 
     private void extend() {
@@ -23,7 +23,7 @@ public class UserStorage {
     }
 
     public User getUserByIndex(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException("Index Out Of Bounds");
         }
         return users[index];
