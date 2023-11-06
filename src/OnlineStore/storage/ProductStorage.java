@@ -34,4 +34,15 @@ public class ProductStorage {
         }
         return null;
     }
+
+    public void printProducts() {
+        if (count == 0) {
+            System.out.println("The Storage is empty.");
+            return;
+        }
+        for (int i = 0; i < count; i++) {
+            Product p = products[i];
+            System.out.println(p.toString());
+        }
+    }
 }

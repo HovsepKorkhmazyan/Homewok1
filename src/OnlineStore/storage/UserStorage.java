@@ -1,5 +1,6 @@
 package OnlineStore.storage;
 
+import OnlineStore.model.Product;
 import OnlineStore.model.User;
 
 public class UserStorage {
@@ -28,4 +29,13 @@ public class UserStorage {
         }
         return users[index];
     }
+    public void printUSers() {
+        if (count == 0) {
+            System.out.println("No User Found.");
+            return;
+        }
+        for (int i = 0; i < count; i++) {
+            User user = users[i];
+            System.out.println(user.toString());
+        }
 }
