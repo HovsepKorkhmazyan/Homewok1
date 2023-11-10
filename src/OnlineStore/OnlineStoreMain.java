@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static OnlineStore.storage.UserStorage.users;
 
 public class OnlineStoreMain {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     static UserStorage user = new UserStorage();
     static ProductStorage products = new ProductStorage();
     static OrderStorage orders = new OrderStorage();
@@ -27,7 +27,7 @@ public class OnlineStoreMain {
             System.out.println("0 - Login");
             System.out.println("1 - Register");
             System.out.println("2 - Exit");
-            int choice = scanner.nextInt();
+            int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
                 case 0:
@@ -38,6 +38,7 @@ public class OnlineStoreMain {
                     break;
                 case 2:
                     isExit = true;
+                    break;
                 default:
                     System.out.println("Invalid Option");
             }
@@ -51,12 +52,12 @@ public class OnlineStoreMain {
         System.out.println("Please Enter Your Password");
         String password = scanner.nextLine();
 
-        for (User user : users) {
+        for (User user : UserStorage) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 loggedInUser = user;
                 if (user.getType() == User.UserType.ADMIN) {
                     showAdminMenu();
-                } else {
+                } else if (user.getType() == User.UserType.USER) {
                     showUserMenu();
                 }
                 return;
@@ -134,18 +135,20 @@ public class OnlineStoreMain {
                     Product product = new Product(id, name, description, price, stockQty, type);
 
                     products.addProduct(product);
-                    System.out.println("The Product has been added!");
+                    System.out.println("The Product Has Been Added!");
                     break;
                 case 2:
                     products.printProducts();
                     break;
                 case 3:
-                    user.printUSers();
+                    user.printUsers();
+                    break;
                 case 4:
                     orders.printAllOrders();
+                    break;
 
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("Invalid Choice.");
             }
         }
     }
@@ -153,11 +156,11 @@ public class OnlineStoreMain {
     private static void showUserMenu() {
         while (true) {
             System.out.println("User Menu:");
-            System.out.println("0 - logout");
-            System.out.println("1 - print all products");
+            System.out.println("0 - Logout");
+            System.out.println("1 - Print All Products");
 
 
-            int choice = scanner.nextInt();
+            int choice = Integer.parseInt(scanner.nextLine());
 
 
             switch (choice) {

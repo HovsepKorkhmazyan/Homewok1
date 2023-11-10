@@ -29,7 +29,8 @@ public class UserStorage {
         }
         return users[index];
     }
-    public void printUSers() {
+
+    public void printUsers() {
         if (count == 0) {
             System.out.println("No User Found.");
             return;
@@ -38,4 +39,5 @@ public class UserStorage {
             User user = users[i];
             System.out.println(user.toString());
         }
+    }
 }
