@@ -1,22 +1,17 @@
 package OnlineStore;
 
 import OnlineStore.exception.OutOfStockException;
-import OnlineStore.model.Order;
 import OnlineStore.model.Product;
 import OnlineStore.model.User;
-import OnlineStore.storage.OrderStorage;
-import OnlineStore.storage.ProductStorage;
-import OnlineStore.storage.UserStorage;
+import OnlineStore.storages.UserStorage;
 
 import java.util.Scanner;
 
-import static OnlineStore.storage.UserStorage.users;
-
 public class OnlineStoreMain {
     private static final Scanner scanner = new Scanner(System.in);
-    static UserStorage user = new UserStorage();
-    static ProductStorage products = new ProductStorage();
-    static OrderStorage orders = new OrderStorage();
+    private static UserStorage userStorage = new UserStorage();
+    private static OnlineStore.ProductStorage productStorage = new OnlineStore.ProductStorage();
+    private static OnlineStore.OrderStorage orderStorage = new OnlineStore.OrderStorage();
 
     private static User loggedInUser;
 
@@ -43,7 +38,6 @@ public class OnlineStoreMain {
                     System.out.println("Invalid Option");
             }
         }
-
     }
 
     private static void login() {
@@ -52,16 +46,15 @@ public class OnlineStoreMain {
         System.out.println("Please Enter Your Password");
         String password = scanner.nextLine();
 
-        for (User user : UserStorage) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                loggedInUser = user;
-                if (user.getType() == User.UserType.ADMIN) {
-                    showAdminMenu();
-                } else if (user.getType() == User.UserType.USER) {
-                    showUserMenu();
-                }
-                return;
+        User user = userStorage.getUser(email);
+        if (user != null && user.getPassword().equals(password)) {
+            loggedInUser = user;
+            if (user.getType() == User.UserType.ADMIN) {
+                showAdminMenu();
+            } else if (user.getType() == User.UserType.USER) {
+                showUserMenu();
             }
+            return;
         }
         System.out.println("Invalid Email or Password.");
     }
@@ -69,7 +62,6 @@ public class OnlineStoreMain {
     private static void register() {
         System.out.println("Enter id:");
         int id = Integer.parseInt(scanner.nextLine());
-
 
         System.out.println("Enter name:");
         String name = scanner.nextLine();
@@ -90,94 +82,90 @@ public class OnlineStoreMain {
         }
 
         User newUser = new User(id, name, email, password, type);
-        user.add(newUser);
+        userStorage.addUser(newUser);
 
         System.out.println("Registration successful!");
         showUserMenu();
     }
 
     private static void showAdminMenu() {
-        while (true) {
-            System.out.println("Admin Menu:");
-            System.out.println("0 - logout");
-            System.out.println("1 - add product");
-            System.out.println("2 - print all products");
-            System.out.println("3 - print all users");
-            System.out.println("4 - print all orders");
+        System.out.println("Admin Menu:");
+        System.out.println("0 - Logout");
+        System.out.println("1 - Add product");
+        System.out.println("2 - Print all products");
+        System.out.println("3 - Print all users");
+        System.out.println("4 - Print all orders");
 
-            int choice = scanner.nextInt();
-
-
-            switch (choice) {
-                case 0:
-                    logout();
-                    return;
-                case 1:
-                    System.out.print("Enter ID: ");
-                    int id = Integer.parseInt(scanner.nextLine());
-
-                    System.out.print("Enter Name: ");
-                    String name = scanner.nextLine();
-
-                    System.out.print("Enter Description: ");
-                    String description = scanner.nextLine();
-
-                    System.out.print("Enter Price: ");
-                    double price = Double.parseDouble(scanner.nextLine());
-
-                    System.out.print("Enter Stock Quantity: ");
-                    int stockQty = Integer.parseInt(scanner.nextLine());
-
-
-                    System.out.print("Enter Product Type (ELECTRONICS, CLOTHING, BOOKS): ");
-                    Product.ProductType type = Product.ProductType.valueOf(scanner.nextLine());
-
-                    Product product = new Product(id, name, description, price, stockQty, type);
-
-                    products.addProduct(product);
-                    System.out.println("The Product Has Been Added!");
-                    break;
-                case 2:
-                    products.printProducts();
-                    break;
-                case 3:
-                    user.printUsers();
-                    break;
-                case 4:
-                    orders.printAllOrders();
-                    break;
-
-                default:
-                    System.out.println("Invalid Choice.");
-            }
+        int choice = Integer.parseInt(scanner.nextLine());
+        switch (choice) {
+            case 0:
+                logout();
+                return;
+            case 1:
+                addProduct();
+                break;
+            case 2:
+                productStorage.printProducts();
+                break;
+            case 3:
+                userStorage.printUsers();
+                break;
+            case 4:
+                orderStorage.printAllOrders();
+                break;
+            default:
+                System.out.println("Invalid Choice.");
         }
     }
+
+    private static void addProduct() {
+        System.out.print("Enter ID: ");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter Description: ");
+        String description = scanner.nextLine();
+
+        System.out.print("Enter Price: ");
+        double price = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Enter Stock Quantity: ");
+        int stockQty = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Enter Product Type (ELECTRONICS, CLOTHING, BOOKS): ");
+        Product.ProductType type = Product.ProductType.valueOf(scanner.nextLine().toUpperCase());
+
+        Product product = new Product(id, name, description, price, stockQty, type);
+
+        productStorage.addProduct(product);
+        System.out.println("Product Added Successfully!");
+    }
+
 
     private static void showUserMenu() {
         while (true) {
             System.out.println("User Menu:");
             System.out.println("0 - Logout");
-            System.out.println("1 - Print All Products");
-
+            System.out.println("1 - View all products");
+            System.out.println("2 - Buy a product");
 
             int choice = Integer.parseInt(scanner.nextLine());
-
-
             switch (choice) {
                 case 0:
                     logout();
                     return;
                 case 1:
-                    products.printProducts();
+                    productStorage.printProducts();
                     break;
-                case 3:
+                case 2:
                     try {
                         buyProduct();
                     } catch (OutOfStockException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-
                 default:
                     System.out.println("Invalid choice.");
             }
@@ -190,15 +178,4 @@ public class OnlineStoreMain {
     }
 
 
-    private static void printProducts() {
-
-    }
-
-    private static void buyProduct() throws OutOfStockException {
-        System.out.println("Enter product id:");
-        int productId = scanner.nextInt();
-    }
-
 }
-
-
